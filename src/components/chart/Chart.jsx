@@ -6,15 +6,22 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  YAxis,
 } from "recharts";
 
 const data = [
-  { name: "January", Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March", Total: 800 },
-  { name: "April", Total: 1600 },
+  { name: "Jan", Total: 1200 },
+  { name: "Feb", Total: 2100 },
+  { name: "Mar", Total: 800 },
+  { name: "Apr", Total: 1600 },
   { name: "May", Total: 900 },
-  { name: "June", Total: 1700 },
+  { name: "Jun", Total: 1700 },
+  { name: "Jul", Total: 1800 },
+  { name: "Aug", Total: 1500 },
+  { name: "Sep", Total: 2100 },
+  { name: "Oct", Total: 2200 },
+  { name: "Nov", Total: 2300 },
+  { name: "Dec  ", Total: 2400 },
 ];
 
 const Chart = ({ aspect, title }) => {
@@ -23,7 +30,7 @@ const Chart = ({ aspect, title }) => {
       <div className="title">{title}</div>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
-          width={730}
+          width={930}
           height={250}
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
@@ -35,6 +42,7 @@ const Chart = ({ aspect, title }) => {
             </linearGradient>
           </defs>
           <XAxis dataKey="name" stroke="gray" />
+          <YAxis dataKey="Total" />
           <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
           <Tooltip />
           <Area
