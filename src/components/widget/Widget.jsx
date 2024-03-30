@@ -4,13 +4,46 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Widget = ({ type }) => {
+  const [amount, setAmount] = useState(null);
+  const [diff, setDiff] = useState(null);
   let data;
 
   //temporary
-  const amount = 100;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const today = new Date();
+      const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
+      const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
+
+      const lastMonthQuery = query(
+        collection(db, "Test"),
+        where("timestamp", "<=", today),
+        where("timestamp", ">", lastMonth)
+      ); //tháng trước tới hôm nay
+      const prevMonthQuery = query(
+        collection(db, "Test"),
+        where("timestamp", "<=", lastMonth),
+        where("timestamp", ">", prevMonth)
+      ); //tháng trước trở về 2 tháng trước
+      const lastMonthData = await getDocs(lastMonthQuery);
+      const prevMonthData = await getDocs(prevMonthQuery);
+      console.log(lastMonthData.docs.length, prevMonthData.docs.length);
+      setAmount(lastMonthData.docs.length);
+      const cc =
+        ((lastMonthData.docs.length - prevMonthData.docs.length) /
+          prevMonthData.docs.length) *
+        100;
+      setDiff(cc);
+    };
+    fetchData();
+  }, []);
   switch (type) {
     case "user":
       data = {
@@ -87,8 +120,9 @@ const Widget = ({ type }) => {
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
+        <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>
+          {diff < 0 ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+          {diff} %
         </div>
         {data.icon}
       </div>
