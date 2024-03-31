@@ -7,9 +7,7 @@ export const userColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          
           <img className="cellImg" src={params.row.avatar} alt="avatar" />
-         
         </div>
       );
     },
@@ -105,6 +103,42 @@ export const categoriesRows = [
   {
     field: "tenloai",
     headerName: "Loại sản phẩm",
+    width: 160,
+  },
+];
+export const discountColumns = [
+  {
+    field: "id",
+    headerName: "Id",
+    width: 200,
+  },
+  {
+    field: "tenKM",
+    headerName: "Tên khuyến mãi",
+    width: 160,
+  },
+  {
+    field: "code",
+    headerName: "Mã khuyến mãi",
+    width: 160,
+  },
+  {
+    field: "type",
+    headerName: "Loại khuyến mãi",
+    width: 160,
+    valueGetter: (params) => {
+      if (params.value === 1) {
+        return "Giảm giá theo %";
+      } else if (params.value === 2) {
+        return "Giảm giá theo tiền";
+      } else {
+        return params.value;
+      }
+    },
+  },
+  {
+    field: "timestamp",
+    headerName: "Ngày hết hạn",
     width: 160,
   },
 ];

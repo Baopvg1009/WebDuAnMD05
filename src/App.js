@@ -4,8 +4,9 @@ import List from "./pages/list/List";
 import ListBill from "./pages/list/ListBill";
 import ListCategory from "./pages/list/ListCategory";
 import New from "./pages/new/New";
+import ListDiscount from "./pages/list/ListDiscount";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { categoryInputs, productInputs, userInputs } from "./formSource";
+import { categoryInputs, discountInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -107,6 +108,23 @@ function App() {
               element={
                 <RequireAuth>
                   <EditCategory inputs={categoryInputs} title="Edit Category" />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="discount"
+              index
+              element={
+                <RequireAuth>
+                  <ListDiscount />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/discount/:discountId"
+              element={
+                <RequireAuth>
+                  <EditCategory inputs={discountInputs} title="Edit Discount" />
                 </RequireAuth>
               }
             />

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
@@ -49,7 +50,7 @@ const Widget = ({ type }) => {
       data = {
         title: "USERS",
         isMoney: false,
-        link: "See all users",
+        link: <Link to="/users">See all users</Link>,
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -65,7 +66,7 @@ const Widget = ({ type }) => {
       data = {
         title: "ORDERS",
         isMoney: false,
-        link: "View all orders",
+        link: <Link to="/orders">View all Orders</Link>,
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"

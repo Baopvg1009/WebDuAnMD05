@@ -4,7 +4,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import CategoryIcon from "@mui/icons-material/Category";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
-
+import DiscountIcon from "@mui/icons-material/Discount";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -68,6 +68,12 @@ const Sidebar = () => {
             <li>
               <CategoryIcon className="icon" />
               <span>Categories</span>
+            </li>
+          </Link>
+          <Link to="/discount" style={{ textDecoration: "none" }}>
+            <li>
+              <DiscountIcon className="icon" />
+              <span>Discounts</span>
             </li>
           </Link>
           {/* <p className="title">USER</p>

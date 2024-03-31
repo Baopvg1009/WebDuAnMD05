@@ -93,3 +93,25 @@ export const categoryInputs = [
     type: "text",
   },
 ];
+export const discountInputs = [
+  {
+    id: "tenKM",
+    label: "Tên khuyến mãi",
+    type: "text",
+  },
+  {
+    id: "code",
+    label: "Mã khuyến mãi",
+    type: "text",
+  },
+  {
+    id: "type",
+    label: "Loại khuyến mãi",
+    type: "number",
+  },
+  {
+    id: "timestamp",
+    label: "Ngày hết hạn",
+    type: "text",
+  },
+];
