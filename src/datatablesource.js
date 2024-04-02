@@ -121,32 +121,23 @@ export const statisticRows = [
     width: 100, 
   },
   {
-    field: "ngay",
+    field: "ngaydat",
     headerName: "Ngày",
     width: 200, 
   },
+
   {
-    field: "loaisp",
-    headerName: "Loại sản phẩm",
-    width: 200,
-  },
-  {
-    field: "tensp",
-    headerName: "Tên sản phẩm",
+    field: "hoten",
+    headerName: "Họ và tên",
     width: 160,
   },
   {
-    field: "soluong",
-    headerName: "Số lượng",
+    field: "phuongthuc",
+    headerName: "Phương thức",
     width: 160,
   },
   {
-    field: "giamgia",
-    headerName: "Giảm giá",
-    width: 160,
-  },
-  {
-    field: "doanhthu",
+    field: "tongtien",
     headerName: "Doanh thu",
     width: 160,
     groupable: false,

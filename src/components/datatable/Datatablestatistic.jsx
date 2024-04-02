@@ -4,10 +4,11 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { DateTimeRangePicker } from '@mui/x-date-pickers-pro/DateTimeRangePicker';
-import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { statisticRows } from "../../datatablesource";
 import "./datatable.scss";
+import Chartthongke from "../chart/Chartthongke";
+import { query, where, getDocs, collection } from 'firebase/firestore';
 
 const Datatablestatistic = () => {
     const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const Datatablestatistic = () => {
 
     const fetchData = async () => {
         try {
-            const querySnapshot = await getDocs(collection(db, "statistic"));
+            const querySnapshot = await getDocs(query(collection(db, "HoaDon"), where("trangthai", "==", 3)));
             const fetchedData = [];
             querySnapshot.forEach((doc) => {
                 fetchedData.push({ id: doc.id, ...doc.data() });
@@ -33,6 +34,7 @@ const Datatablestatistic = () => {
             console.error("Error fetching data: ", error);
         }
     };
+    
 
     return (
         <div className="datatable">
@@ -47,8 +49,9 @@ const Datatablestatistic = () => {
                 </LocalizationProvider>
                 <div className="searchButton">Search</div>
             </div>
-           
-                <div style={{ height: "auto", width: '100%' }}>
+
+            <div style={{ display: 'flex', height: '100%' }}>
+                <div style={{ flex: '1 0 65%' }}>
                     <DataGridPremium
                         key={ignoreDiacritics.toString()}
                         rows={data}
@@ -62,17 +65,20 @@ const Datatablestatistic = () => {
                         initialState={{
                             aggregation: {
                                 model: {
-                                    doanhthu: 'sum'
+                                    tongtien: 'sum'
                                 }
                             }
                         }}
-                        
-                        
                     />
                 </div>
-                
+                <div style={{ flex: '1 0 35%' }}>
+                    <Chartthongke data={data} />
+                </div>
             </div>
-     
+
+
+        </div>
+
     );
 };
 
